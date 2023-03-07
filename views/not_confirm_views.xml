@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <!-- hotel.orderhotel action window -->
+        <record id="not_confirm_action" model="ir.actions.act_window">
+            <field name="name">Order Hotel Ditolak</field>
+            <field name="res_model">hotel.orderhotel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','not_confirm')]</field>
+            <field name="context">{'default_state':'not_confirm'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> 
+                    Create your firts order hotel
+                </p>
+            </field>
+        </record>
+    
+    </data>
+    
+    <menuitem 
+        id="not_confirm_id" 
+        name="Banned Orders" 
+        action="not_confirm_action" 
+        parent="service_id" 
+        sequence="13"/>
+    
+
+</odoo>

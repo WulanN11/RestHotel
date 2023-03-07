@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="inherit_res_partner_view_form" model="ir.ui.view">
+            <field name="name">inherit res partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="is_custommer" />
+                </field>
+            </field>
+        </record>
+
+        <record id="custommer_action" model="ir.actions.act_window">
+            <field name="name">Custommmer Hotel</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_custommer','=',True)]</field>
+            <field name="context">{'default_is_custommer':True}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your firts Custommer
+                </p>
+            </field>
+        </record>
+    
+    </data>
+    
+    <menuitem 
+        id="custommer_id" 
+        name="Custommer" 
+        action="custommer_action" 
+        parent="status_id" 
+        sequence="10"/>
+
+
+</odoo>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- hotel.orderhotel form view -->
+        <record id="confirm_view_form" model="ir.ui.view">
+            <field name="name">confirm</field>
+            <field name="model">hotel.orderhotel</field>
+            <field name="arch" type="xml">
+                <form string="Order">
+                    <header>
+                        <button id="button_done" string="Konfirmasi" name="action_done" type="object" states="pay" class="btn-primary" />
+                        <button id="button_not_confirm" string="Tolak" name="action_not_confirm" type="object" states="pay" class="btn-danger" />
+                        <field name="state" widget="statusbar" statusbar_visible="pay" />
+                    </header>
+                    <sheet>
+                        <group string="Order Hotel">
+                            <field name="name" />
+                            <field name="tgl_check_in" />
+                            <field name="tgl_check_out" />
+                            <field name="no_confirm" />
+                        </group>
+                        <notebook>
+                            <page name="detail_order" string="DETAIL ORDER">
+                                <field name="detailorder_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                                    <tree editable="buttom">
+                                        <field name="models_id"/>
+                                        <field name="harga" widget="monetary"/>
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="jml_harga" widget="monetary" />
+                                        <field name="jml_hari" />
+                                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                            <label for="tagihan"/>
+                                        </div>
+                                        <field name="tagihan" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <!-- <div class="oe_chatter">
+                        <field name="message_follower_ids" />
+                        <field name="activity_ids" />
+                        <field name="message_ids" />
+                        </div> -->
+                </form>
+            </field>
+        </record>
+
+        <!-- hotel.orderhotel tree view -->
+        <record id="confirm_tree" model="ir.ui.view">
+            <field name="name">confirmtree</field>
+            <field name="model">hotel.orderhotel</field>
+            <field name="arch" type="xml">
+                <tree string="Confirm" multi_edit="1" sample="1">
+                    <!-- Add your fields here -->
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- hotel.orderhotel action window -->
+        <record id="confirm_action" model="ir.actions.act_window">
+            <field name="name">Konfirmasi Hotel</field>
+            <field name="res_model">hotel.orderhotel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','pay')]</field>
+            <field name="context">{'default_state':'pay'}</field>
+            <field name="view_ids"
+                eval="[(5,0,0),
+                    (0, 0, {'sequence': 3, 'view_mode': 'form', 'view_id': ref('rest_hotel.confirm_view_form')}),
+                    (0, 0, {'sequence': 2, 'view_mode': 'tree', 'view_id': ref('rest_hotel.confirm_tree')})
+                ]"
+            />
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> 
+                    Create your firts order hotel
+                </p>
+            </field>
+        </record>
+    
+    </data>
+    
+    <menuitem 
+        id="confirmation_id" 
+        name="Confirm" 
+        action="confirm_action" 
+        parent="hotel_root" 
+        sequence="14"/>
+
+</odoo>

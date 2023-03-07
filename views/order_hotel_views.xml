@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <record id="order_form" model="ir.ui.view">
+            <field name="name">hotel.orderhotel.view.form</field>
+            <field name="model">hotel.orderhotel</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <form string="Order">
+                    <header>
+                        <button id="button_confirm" string="Konfirmasi" name="action_confirm" type="object" class="btn-primary" states="draft"/>
+                        <button id="button_pay" string="Bayar" name="action_pay" type="object" class="btn-primary" states="confirm"/>
+                        <button id="button_cancel" string="Cancel" name="action_cancel" type="object" states="draft,confirm,pay" class="btn-danger" />
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm" />
+                    </header>
+                    <sheet>
+                        <group string="Order Hotel">
+                            <field name="name" />
+                            <field name="tgl_check_in" />
+                            <field name="tgl_check_out" />
+                            <field name="no_confirm" />
+                        </group>
+                        <notebook>
+                            <page name="detail_order" string="DETAIL ORDER">
+                                <field name="detailorder_ids" widget="section_and_note_one2many" mode="tree,kanban">
+                                    <tree editable="buttom">
+                                        <field name="models_id"/>
+                                        <field name="jml_kamar" />
+                                        <field name="harga" widget="monetary"/>
+                                        <field name="total_harga" widget="monetary" />
+                                    </tree>
+                                </field>
+                                <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                    <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                        <field name="jml_harga" widget="monetary" />
+                                        <field name="jml_hari" />
+                                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                            <label for="tagihan"/>
+                                        </div>
+                                        <field name="tagihan" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                    </group>
+                                    <div class="oe_clear"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="order_tree" model="ir.ui.view">
+            <field name="name">hotel.orderhotel.tree</field>
+            <field name="model">hotel.orderhotel</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <tree string="Confirm" multi_edit="1" sample="1">
+                    <field name="name" />
+                    <field name="no_confirm" />
+                    <field name="tgl_check_in" />
+                    <field name="tgl_check_out" />
+                    <field name="tagihan" />
+                </tree>
+            </field>
+        </record>
+        
+
+        <record id="order_action" model="ir.actions.act_window">
+            <field name="name">Order Hotel</field>
+            <field name="res_model">hotel.orderhotel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','!=','done'),('state','!=','cancel'),('state','!=','not_confirm')]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> 
+                    Create your firts order hotel
+                </p>
+            </field>
+        </record>
+    </data>
+
+    <menuitem 
+        id="order_id" 
+        name="Orders" 
+        action="order_action" 
+        parent="service_id" 
+        sequence="10"/>
+
+</odoo>

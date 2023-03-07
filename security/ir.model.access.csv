@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hotel_orderhotel,access.hotel.orderhotel,model_hotel_orderhotel,,1,1,1,1
+access_hotel_rooms,access.hotel.rooms,model_hotel_rooms,,1,1,1,1
+access_hotel_detailorder,access.hotel.detailorder,model_hotel_detailorder,,1,1,1,1
+access_hotel_akunting,access.hotel.akunting,model_hotel_akunting,,1,1,1,1

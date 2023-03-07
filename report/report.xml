@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="report_hotel_orderhotel_details" model="ir.actions.report">
+            <field name="name">Hotel Order</field>
+            <field name="model">hotel.orderhotel</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">rest_hotel.report_hotel_orderhotel_id</field>
+            <field name="report_file">rest_hotel.report_hotel_orderhotel_id</field>
+            <field name="print_report_name">'RestHotel'</field>
+            <field name="binding_model_id" ref="model_hotel_orderhotel" />
+            <field name="binding_type">report</field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

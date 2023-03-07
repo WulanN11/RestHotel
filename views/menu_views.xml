@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+        <menuitem id="hotel_root" name="RestHOTEL" sequence="10"/>
+
+        <!-- This is Service Hotel -->
+        <menuitem id="service_id" name="Service" parent="hotel_root" sequence="10"/>
+        <!-- This is Status People Hotel -->
+        <menuitem id="status_id" name="Status" parent="hotel_root" sequence="15"/>
+        
+    
+    </data>
+    
+</odoo>

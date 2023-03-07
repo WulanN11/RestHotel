@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <!-- hotel.orderhotel action window -->
+        <record id="cenceled_action" model="ir.actions.act_window">
+            <field name="name">Cancel Order Hotel</field>
+            <field name="res_model">hotel.orderhotel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','cancel')]</field>
+            <field name="context">{'default_state':'cancel'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face"> 
+                    Create your firts order hotel
+                </p>
+            </field>
+        </record>       
+
+    </data>
+
+    <menuitem 
+        id="canceled_id"   
+        name="Cancel Order Hotel" 
+        action="cenceled_action" 
+        parent="service_id" 
+        sequence="12"/>
+    
+
+</odoo>
